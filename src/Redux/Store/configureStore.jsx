@@ -4,12 +4,13 @@ import {playListReducer,playListDetailsReducer} from "../Reducers/playListReduce
 import { navbarSelectedItemReducer } from "../Reducers/NavbarReducers.jsx";
 import { songReducer } from "../Reducers/songReducers.jsx";
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const middleware =compose(
+const middleware = composeEnhancers(
     applyMiddleware(thunk)
-    , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-const rootReducer =combineReducers({
+
+const rootReducer = combineReducers({
     playListReducer,
     playListDetailsReducer,
     navbarSelectedItemReducer,
@@ -17,5 +18,5 @@ const rootReducer =combineReducers({
 });
 
 export function configureStore() {
-    return createStore(rootReducer,middleware);
+    return createStore(rootReducer, {}, middleware);
 }
